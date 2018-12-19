@@ -1,3 +1,7 @@
+# Team:
+* alephnul: graphics, ...
+* xeno: content, repo management, testing
+
 # Objectives:
 * Creation of an efficient, flexible and artistic 3D-Graphical Engine with the purpose of creating FP-POV video games (read Game-Engine Capabilities section)
 * Writing of a story that fits the artistic beauty and computing capabilities of the engine
