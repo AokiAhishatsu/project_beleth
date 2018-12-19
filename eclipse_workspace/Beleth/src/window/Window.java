@@ -1,7 +1,6 @@
 package window;
 
 import java.nio.IntBuffer;
-
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -21,6 +20,7 @@ public class Window {
 		this.winTitle = winTitle;
 		init();
 	}
+
 	
 	private void init() {
 		// Setup an error callback. The default implementation
@@ -43,6 +43,7 @@ public class Window {
 
 		// Setup a key callback. It will be called every time a key is pressed, repeated or released.
 		GLFW.glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+			//add keyboard and mouse callbacks here
 			if ( key == GLFW.GLFW_KEY_ESCAPE && action == GLFW.GLFW_RELEASE )
 				GLFW.glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
 		});
