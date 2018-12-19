@@ -5,8 +5,6 @@ import java.nio.IntBuffer;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
@@ -14,10 +12,14 @@ import org.lwjgl.system.MemoryUtil;
 public class Window {
 	
 	private long window;
+	private int width, height;
+	private String winTitle;
 	
-	public Window() {
+	public Window(int width, int height, String winTitle) {
+		this.width = width;
+		this.height = height;
+		this.winTitle = winTitle;
 		init();
-		loop();
 	}
 	
 	private void init() {
@@ -31,11 +33,11 @@ public class Window {
 
 		// Configure GLFW
 		GLFW.glfwDefaultWindowHints(); // optional, the current window hints are already the default
-		GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE); // the window will stay hidden after creation
+		GLFW.glfwWindowHint(GLFW.GLFW_CLIENT_API, GLFW.GLFW_NO_API); // the window will stay hidden after creation
 		GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE); // the window will be resizable
 
 		// Create the window
-		window = GLFW.glfwCreateWindow(300, 300, "Hello World!", MemoryUtil.NULL, MemoryUtil.NULL);
+		window = GLFW.glfwCreateWindow(width, height, winTitle, MemoryUtil.NULL, MemoryUtil.NULL);
 		if ( window == MemoryUtil.NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
@@ -66,35 +68,12 @@ public class Window {
 
 		// Make the OpenGL context current
 		GLFW.glfwMakeContextCurrent(window);
+		
 		// Enable v-sync
 		GLFW.glfwSwapInterval(1);
 
 		// Make the window visible
 		GLFW.glfwShowWindow(window);
-	}
-	
-	private void loop() {
-		// This line is critical for LWJGL's interoperation with GLFW's
-		// OpenGL context, or any context that is managed externally.
-		// LWJGL detects the context that is current in the current thread,
-		// creates the GLCapabilities instance and makes the OpenGL
-		// bindings available for use.
-		GL.createCapabilities();
-
-		// Set the clear color
-		GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
-
-		// Run the rendering loop until the user has attempted to close
-		// the window or has pressed the ESCAPE key.
-		while ( !GLFW.glfwWindowShouldClose(window) ) {
-			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
-			GLFW.glfwSwapBuffers(window); // swap the color buffers
-
-			// Poll for window events. The key callback above will only be
-			// invoked during this call.
-			GLFW.glfwPollEvents();
-		}
 	}
 	
 	public long id() {
