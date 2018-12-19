@@ -74,7 +74,7 @@ public class Vertices {
         vkGetBufferMemoryRequirements(device, verticesBuf, memReqs);
         memAlloc.allocationSize(memReqs.size());
         IntBuffer memoryTypeIndex = memAllocInt(1);
-        getMemoryType(deviceMemoryProperties, memReqs.memoryTypeBits(), VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, memoryTypeIndex);
+        //getMemoryType(deviceMemoryProperties, memReqs.memoryTypeBits(), VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, memoryTypeIndex);
         memAlloc.memoryTypeIndex(memoryTypeIndex.get(0));
         memFree(memoryTypeIndex);
         memReqs.free();

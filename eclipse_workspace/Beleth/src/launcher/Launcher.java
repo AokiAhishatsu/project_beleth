@@ -89,7 +89,7 @@ public class Launcher {
         if (err != VK_SUCCESS) {
             throw new AssertionError("Failed to create surface: " + VKUtil.translateVulkanResult(err));
         }
-        return pSurface.get(0);;
+        return pSurface.get(0);
 	}
 
 }
