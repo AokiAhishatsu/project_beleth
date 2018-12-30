@@ -22,8 +22,8 @@ import core.DeviceAndGraphicsQueueFamily;
 import core.Vertices;
 import core.VulkanCommand;
 import core.VulkanInstance;
-import helpers.Debugger;
-import helpers.VKUtil;
+import util.Debugger;
+import util.VKUtil;
 import window.Window;
 
 public class Launcher {
