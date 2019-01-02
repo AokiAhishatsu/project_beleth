@@ -43,6 +43,7 @@ import java.nio.ByteBuffer;
 import java.nio.LongBuffer;
 
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.system.Pointer;
 import org.lwjgl.vulkan.VkBufferCopy;
 import org.lwjgl.vulkan.VkBufferImageCopy;
 import org.lwjgl.vulkan.VkClearValue;
@@ -59,16 +60,12 @@ import org.lwjgl.vulkan.VkMemoryBarrier;
 import org.lwjgl.vulkan.VkOffset3D;
 import org.lwjgl.vulkan.VkRect2D;
 import org.lwjgl.vulkan.VkRenderPassBeginInfo;
-import org.oreon.core.math.Vec3f;
-import org.oreon.core.vk.util.VkUtil;
-
-import lombok.Getter;
+import core.math.Vec3f;
+import core.util.VkUtil;
 
 public class CommandBuffer {
 
-	@Getter
 	private VkCommandBuffer handle;
-	@Getter 
 	private PointerBuffer handlePointer;
 	
 	private VkDevice device;
@@ -431,6 +428,14 @@ public class CommandBuffer {
 	public void destroy(){
 		
 		vkFreeCommandBuffers(device, commandPool, handlePointer);
+	}
+
+	public PointerBuffer getHandlePointer() {
+		return handlePointer;
+	}
+
+	public VkCommandBuffer getHandle() {
+		return handle;
 	}
 	
 }

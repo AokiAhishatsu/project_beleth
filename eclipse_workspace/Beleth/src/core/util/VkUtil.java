@@ -46,9 +46,9 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.vulkan.VkClearColorValue;
 import org.lwjgl.vulkan.VkClearValue;
 import core.math.Vec3f;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
+import core.command.CommandBuffer;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
 
 
 public class VkUtil {
