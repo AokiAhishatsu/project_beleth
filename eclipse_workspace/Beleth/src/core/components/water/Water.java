@@ -1,4 +1,4 @@
-package org.oreon.vk.components.water;
+package core.components.water;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.system.MemoryUtil.memAllocInt;
@@ -36,61 +36,63 @@ import java.util.List;
 
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.common.water.WaterConfiguration;
-import org.oreon.core.context.BaseContext;
-import org.oreon.core.math.Vec2f;
-import org.oreon.core.math.Vec4f;
-import org.oreon.core.model.Vertex.VertexLayout;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.core.scenegraph.RenderList;
-import org.oreon.core.scenegraph.Renderable;
-import org.oreon.core.scenegraph.Scenegraph;
-import org.oreon.core.target.FrameBufferObject.Attachment;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.util.Constants;
-import org.oreon.core.util.MeshGenerator;
-import org.oreon.core.util.Util;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.context.DeviceManager.DeviceType;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.descriptor.DescriptorPool;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.LogicalDevice;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.framebuffer.VkFrameBufferObject;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.image.VkSampler;
-import org.oreon.core.vk.memory.VkBuffer;
-import org.oreon.core.vk.pipeline.ShaderModule;
-import org.oreon.core.vk.pipeline.ShaderPipeline;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.pipeline.VkVertexInput;
-import org.oreon.core.vk.scenegraph.VkMeshData;
-import org.oreon.core.vk.scenegraph.VkRenderInfo;
-import org.oreon.core.vk.synchronization.Fence;
-import org.oreon.core.vk.synchronization.VkSemaphore;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.buffer.VkBufferHelper;
-import org.oreon.core.vk.wrapper.buffer.VkUniformBuffer;
-import org.oreon.core.vk.wrapper.command.ComputeCmdBuffer;
-import org.oreon.core.vk.wrapper.command.MipMapGenerationCmdBuffer;
-import org.oreon.core.vk.wrapper.command.PrimaryCmdBuffer;
-import org.oreon.core.vk.wrapper.command.SecondaryDrawCmdBuffer;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-import org.oreon.core.vk.wrapper.image.VkImageHelper;
-import org.oreon.core.vk.wrapper.pipeline.GraphicsTessellationPipeline;
-import org.oreon.vk.components.fft.FFT;
-import org.oreon.vk.components.util.NormalRenderer;
+import core.math.Vec2f;
 
-import lombok.Getter;
+import core.math.Vec4f;
+import core.memory.VkBuffer;
+import core.model.Vertex.VertexLayout;
+import core.command.CommandBuffer;
+import core.command.SubmitInfo;
+import core.common.water.WaterConfiguration;
+import core.components.fft.FFT;
+import core.components.util.NormalRenderer;
+import core.context.BaseContext;
+import core.context.DeviceManager.DeviceType;
+import core.context.VkContext;
+import core.descriptor.DescriptorPool;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.LogicalDevice;
+import core.device.VkDeviceBundle;
+import core.framebuffer.VkFrameBufferObject;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.image.VkSampler;
+import core.pipeline.ShaderModule;
+import core.pipeline.ShaderPipeline;
+import core.pipeline.VkPipeline;
+import core.pipeline.VkVertexInput;
+import core.scenegraph.NodeComponentType;
+import core.scenegraph.RenderList;
+import core.scenegraph.Renderable;
+import core.scenegraph.Scenegraph;
+import core.scenegraph.VkMeshData;
+import core.scenegraph.VkRenderInfo;
+import core.synchronization.Fence;
+import core.synchronization.VkSemaphore;
+import core.target.FrameBufferObject.Attachment;
+import core.util.BufferUtil;
+import core.util.Constants;
+import core.util.MeshGenerator;
+import core.util.Util;
+import core.util.VkUtil;
+import core.wrapper.buffer.VkBufferHelper;
+import core.wrapper.buffer.VkUniformBuffer;
+import core.wrapper.command.ComputeCmdBuffer;
+import core.wrapper.command.MipMapGenerationCmdBuffer;
+import core.wrapper.command.PrimaryCmdBuffer;
+import core.wrapper.command.SecondaryDrawCmdBuffer;
+import core.wrapper.image.Image2DDeviceLocal;
+import core.wrapper.image.VkImageHelper;
+import core.wrapper.pipeline.GraphicsTessellationPipeline;
 
 public class Water extends Renderable{
 	
-	@Getter
 	private WaterConfiguration waterConfiguration;
+
+	public WaterConfiguration getWaterConfiguration() {
+		return waterConfiguration;
+	}
 
 	private long systemTime = System.currentTimeMillis();
 	private FFT fft;

@@ -1,4 +1,4 @@
-package org.oreon.vk.components.ui;
+package core.components.ui;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.vulkan.VK10.VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
@@ -7,25 +7,25 @@ import static org.lwjgl.vulkan.VK10.VK_SHADER_STAGE_VERTEX_BIT;
 
 import java.nio.ByteBuffer;
 
-import org.oreon.common.ui.UIElement;
-import org.oreon.core.math.Vec4f;
-import org.oreon.core.model.Vertex.VertexLayout;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.context.DeviceManager.DeviceType;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.device.LogicalDevice;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.framebuffer.VkFrameBufferObject;
-import org.oreon.core.vk.pipeline.ShaderPipeline;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.pipeline.VkVertexInput;
-import org.oreon.core.vk.scenegraph.VkMeshData;
-import org.oreon.core.vk.scenegraph.VkRenderInfo;
-import org.oreon.core.vk.wrapper.command.SecondaryDrawIndexedCmdBuffer;
-import org.oreon.core.vk.wrapper.pipeline.GraphicsPipelineAlphaBlend;
+import core.common.ui.UIElement;
+import core.math.Vec4f;
+import core.model.Vertex.VertexLayout;
+import core.scenegraph.NodeComponentType;
+import core.util.BufferUtil;
+import core.command.CommandBuffer;
+import core.command.SubmitInfo;
+import core.context.DeviceManager.DeviceType;
+import core.context.VkContext;
+import core.device.LogicalDevice;
+import core.device.VkDeviceBundle;
+import core.framebuffer.VkFrameBufferObject;
+import core.pipeline.ShaderPipeline;
+import core.pipeline.VkPipeline;
+import core.pipeline.VkVertexInput;
+import core.scenegraph.VkMeshData;
+import core.scenegraph.VkRenderInfo;
+import core.wrapper.command.SecondaryDrawIndexedCmdBuffer;
+import core.wrapper.pipeline.GraphicsPipelineAlphaBlend;
 
 public class VkColorPanel extends UIElement{
 

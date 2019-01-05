@@ -1,4 +1,4 @@
-package org.oreon.vk.components.ui;
+package core.components.ui;
 
 import static org.lwjgl.system.MemoryUtil.memAllocInt;
 import static org.lwjgl.system.MemoryUtil.memAllocLong;
@@ -40,46 +40,44 @@ import java.util.List;
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.common.ui.GUI;
-import org.oreon.common.ui.UIPanelLoader;
-import org.oreon.core.context.BaseContext;
-import org.oreon.core.model.Mesh;
-import org.oreon.core.model.Vertex.VertexLayout;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.core.scenegraph.RenderList;
-import org.oreon.core.target.FrameBufferObject.Attachment;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.util.MeshGenerator;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.context.DeviceManager.DeviceType;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.LogicalDevice;
-import org.oreon.core.vk.framebuffer.FrameBufferColorAttachment;
-import org.oreon.core.vk.framebuffer.VkFrameBuffer;
-import org.oreon.core.vk.framebuffer.VkFrameBufferObject;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.image.VkSampler;
-import org.oreon.core.vk.memory.VkBuffer;
-import org.oreon.core.vk.pipeline.RenderPass;
-import org.oreon.core.vk.pipeline.ShaderPipeline;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.pipeline.VkVertexInput;
-import org.oreon.core.vk.scenegraph.VkMeshData;
-import org.oreon.core.vk.scenegraph.VkRenderInfo;
-import org.oreon.core.vk.synchronization.VkSemaphore;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.buffer.VkBufferHelper;
-import org.oreon.core.vk.wrapper.command.PrimaryCmdBuffer;
-import org.oreon.core.vk.wrapper.command.SecondaryDrawIndexedCmdBuffer;
-import org.oreon.core.vk.wrapper.image.VkImageBundle;
-import org.oreon.core.vk.wrapper.image.VkImageHelper;
-import org.oreon.core.vk.wrapper.pipeline.GraphicsPipeline;
-
-import lombok.Getter;
+import core.common.ui.GUI;
+import core.common.ui.UIPanelLoader;
+import core.context.BaseContext;
+import core.model.Mesh;
+import core.model.Vertex.VertexLayout;
+import core.scenegraph.NodeComponentType;
+import core.scenegraph.RenderList;
+import core.target.FrameBufferObject.Attachment;
+import core.util.BufferUtil;
+import core.util.MeshGenerator;
+import core.command.CommandBuffer;
+import core.command.SubmitInfo;
+import core.context.DeviceManager.DeviceType;
+import core.context.VkContext;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.LogicalDevice;
+import core.framebuffer.FrameBufferColorAttachment;
+import core.framebuffer.VkFrameBuffer;
+import core.framebuffer.VkFrameBufferObject;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.image.VkSampler;
+import core.memory.VkBuffer;
+import core.pipeline.RenderPass;
+import core.pipeline.ShaderPipeline;
+import core.pipeline.VkPipeline;
+import core.pipeline.VkVertexInput;
+import core.scenegraph.VkMeshData;
+import core.scenegraph.VkRenderInfo;
+import core.synchronization.VkSemaphore;
+import core.util.VkUtil;
+import core.wrapper.buffer.VkBufferHelper;
+import core.wrapper.command.PrimaryCmdBuffer;
+import core.wrapper.command.SecondaryDrawIndexedCmdBuffer;
+import core.wrapper.image.VkImageBundle;
+import core.wrapper.image.VkImageHelper;
+import core.wrapper.pipeline.GraphicsPipeline;
 
 public class VkGUI extends GUI{
 
@@ -100,10 +98,12 @@ public class VkGUI extends GUI{
 	private DescriptorSetLayout underlayImageDescriptorSetLayout;
 	private VkSampler underlayImageSampler;
 	
-	@Getter
 	private VkSemaphore signalSemaphore;
 	
-	
+	public VkSemaphore getSignalSemaphore() {
+		return signalSemaphore;
+	}
+
 	public void init(VkImageView underlayImageView, LongBuffer waitSemaphores) {
 
 		LogicalDevice device = VkContext.getDeviceManager()

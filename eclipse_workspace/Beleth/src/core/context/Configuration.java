@@ -1,5 +1,6 @@
 package core.context;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -45,9 +46,9 @@ public class Configuration {
 		
 		properties = new Properties();
 		try {
-			InputStream stream = Configuration.class.getClassLoader().getResourceAsStream("oe-config.properties");
-			properties.load(stream);
-			stream.close();
+			InputStream input = new FileInputStream("src/res/engine-config.properties");
+			properties.load(input);
+			input.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -14,6 +14,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.vulkan.VkExtensionProperties;
 import org.lwjgl.vulkan.VkFormatProperties;
@@ -24,8 +25,10 @@ import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkPhysicalDeviceProperties;
 import core.util.VkUtil;
 
-@Log4j
+
 public class DeviceCapabilities {
+	
+	final static Logger log = Logger.getLogger(DeviceCapabilities.class);
 	
 	public static void checkInstanceExtensionSupport(PointerBuffer ppEnabledExtensionNames){
 		

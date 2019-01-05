@@ -1,4 +1,4 @@
-package org.oreon.vk.components.util;
+package core.components.util;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.system.MemoryUtil.memAllocInt;
@@ -23,25 +23,23 @@ import java.nio.LongBuffer;
 
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.core.util.Util;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.CommandPool;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.image.VkSampler;
-import org.oreon.core.vk.pipeline.ShaderModule;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.synchronization.Fence;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.command.ComputeCmdBuffer;
-import org.oreon.core.vk.wrapper.command.MipMapGenerationCmdBuffer;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-
-import lombok.Getter;
+import core.util.Util;
+import core.command.CommandBuffer;
+import core.command.CommandPool;
+import core.command.SubmitInfo;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.VkDeviceBundle;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.image.VkSampler;
+import core.pipeline.ShaderModule;
+import core.pipeline.VkPipeline;
+import core.synchronization.Fence;
+import core.util.VkUtil;
+import core.wrapper.command.ComputeCmdBuffer;
+import core.wrapper.command.MipMapGenerationCmdBuffer;
+import core.wrapper.image.Image2DDeviceLocal;
 
 public class NormalRenderer {
 
@@ -61,7 +59,6 @@ public class NormalRenderer {
 	private VkQueue transferQueue;
 	private CommandPool graphicsCommandPool;
 	
-	@Getter
 	private VkImageView normalImageView;
 	private int N;
 	
@@ -162,4 +159,9 @@ public class NormalRenderer {
 		normalImageView.destroy();
 		normalImage.destroy();
 	}
+
+	public VkImageView getNormalImageView() {
+		return normalImageView;
+	}
+	
 }
