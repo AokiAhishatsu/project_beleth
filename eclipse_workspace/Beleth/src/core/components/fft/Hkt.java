@@ -1,4 +1,4 @@
-package org.oreon.vk.components.fft;
+package core.components.fft;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.vulkan.VK10.VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
@@ -15,40 +15,51 @@ import java.nio.ByteBuffer;
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.descriptor.DescriptorPool;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.pipeline.ShaderModule;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.synchronization.VkSemaphore;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.buffer.VkUniformBuffer;
-import org.oreon.core.vk.wrapper.command.ComputeCmdBuffer;
-import org.oreon.core.vk.wrapper.descriptor.VkDescriptor;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-
-import lombok.Getter;
+import core.util.BufferUtil;
+import core.command.CommandBuffer;
+import core.command.SubmitInfo;
+import core.descriptor.DescriptorPool;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.VkDeviceBundle;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.pipeline.ShaderModule;
+import core.pipeline.VkPipeline;
+import core.synchronization.VkSemaphore;
+import core.util.VkUtil;
+import core.wrapper.buffer.VkUniformBuffer;
+import core.wrapper.command.ComputeCmdBuffer;
+import core.wrapper.descriptor.VkDescriptor;
+import core.wrapper.image.Image2DDeviceLocal;
 
 public class Hkt {
 	
 	private VkQueue queue;
 
-	@Getter
 	private VkImageView dxCoefficients_imageView;
-	@Getter
 	private VkImageView dyCoefficients_imageView;
-	@Getter
 	private VkImageView dzCoefficients_imageView;
 	
-	@Getter
 	private VkSemaphore signalSemaphore;
 	
+	
+	public VkImageView getDxCoefficients_imageView() {
+		return dxCoefficients_imageView;
+	}
+
+	public VkImageView getDyCoefficients_imageView() {
+		return dyCoefficients_imageView;
+	}
+
+	public VkImageView getDzCoefficients_imageView() {
+		return dzCoefficients_imageView;
+	}
+
+	public VkSemaphore getSignalSemaphore() {
+		return signalSemaphore;
+	}
+
 	private float t;
 	private float t_delta;
 	private long systemTime = System.currentTimeMillis();

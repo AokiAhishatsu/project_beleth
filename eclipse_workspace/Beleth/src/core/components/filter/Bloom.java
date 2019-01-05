@@ -1,4 +1,4 @@
-package org.oreon.vk.components.filter;
+package core.components.filter;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.vulkan.VK10.VK_ACCESS_SHADER_READ_BIT;
@@ -23,24 +23,21 @@ import java.util.List;
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.descriptor.DescriptorPool;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.image.VkSampler;
-import org.oreon.core.vk.pipeline.ShaderModule;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-import org.oreon.core.vk.wrapper.image.VkImageBundle;
-import org.oreon.core.vk.wrapper.shader.ComputeShader;
+import core.command.CommandBuffer;
+import core.descriptor.DescriptorPool;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.VkDeviceBundle;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.image.VkSampler;
+import core.pipeline.ShaderModule;
+import core.pipeline.VkPipeline;
+import core.util.VkUtil;
+import core.wrapper.image.Image2DDeviceLocal;
+import core.wrapper.image.VkImageBundle;
+import core.wrapper.shader.ComputeShader;
 
-import lombok.Getter;
-
-@Getter
 public class Bloom {
 
 	private VkQueue queue;
@@ -834,6 +831,274 @@ public class Bloom {
 	
 	public VkImageView getBloomSceneImageView(){
 		return bloomSceneImageBundle.getImageView();
+	}
+
+	public VkQueue getQueue() {
+		return queue;
+	}
+
+	public VkImageBundle getBloomSceneImageBundle() {
+		return bloomSceneImageBundle;
+	}
+
+	public VkImageBundle getAdditiveBlendImageBundle() {
+		return additiveBlendImageBundle;
+	}
+
+	public VkImageBundle getSceneBrightnessImageBundle() {
+		return sceneBrightnessImageBundle;
+	}
+
+	public VkImageBundle getHorizontalBloomBlurImageBundle_div2() {
+		return horizontalBloomBlurImageBundle_div2;
+	}
+
+	public VkImageBundle getHorizontalBloomBlurImageBundle_div4() {
+		return horizontalBloomBlurImageBundle_div4;
+	}
+
+	public VkImageBundle getHorizontalBloomBlurImageBundle_div8() {
+		return horizontalBloomBlurImageBundle_div8;
+	}
+
+	public VkImageBundle getHorizontalBloomBlurImageBundle_div16() {
+		return horizontalBloomBlurImageBundle_div16;
+	}
+
+	public VkImageBundle getVerticalBloomBlurImageBundle_div2() {
+		return verticalBloomBlurImageBundle_div2;
+	}
+
+	public VkImageBundle getVerticalBloomBlurImageBundle_div4() {
+		return verticalBloomBlurImageBundle_div4;
+	}
+
+	public VkImageBundle getVerticalBloomBlurImageBundle_div8() {
+		return verticalBloomBlurImageBundle_div8;
+	}
+
+	public VkImageBundle getVerticalBloomBlurImageBundle_div16() {
+		return verticalBloomBlurImageBundle_div16;
+	}
+
+	public VkPipeline getSceneBrightnessPipeline() {
+		return sceneBrightnessPipeline;
+	}
+
+	public DescriptorSet getSceneBrightnessDescriptorSet() {
+		return sceneBrightnessDescriptorSet;
+	}
+
+	public DescriptorSetLayout getSceneBrightnessDescriptorSetLayout() {
+		return sceneBrightnessDescriptorSetLayout;
+	}
+
+	public List<DescriptorSet> getSceneBrightnessDescriptorSets() {
+		return sceneBrightnessDescriptorSets;
+	}
+
+	public VkPipeline getHorizontalBlurPipeline_div2() {
+		return horizontalBlurPipeline_div2;
+	}
+
+	public DescriptorSet getHorizontalBlurDescriptorSet_div2() {
+		return horizontalBlurDescriptorSet_div2;
+	}
+
+	public DescriptorSetLayout getHorizontalBlurDescriptorSetLayout_div2() {
+		return horizontalBlurDescriptorSetLayout_div2;
+	}
+
+	public List<DescriptorSet> getHorizontalBlurDescriptorSets_div2() {
+		return horizontalBlurDescriptorSets_div2;
+	}
+
+	public VkPipeline getHorizontalBlurPipeline_div4() {
+		return horizontalBlurPipeline_div4;
+	}
+
+	public DescriptorSet getHorizontalBlurDescriptorSet_div4() {
+		return horizontalBlurDescriptorSet_div4;
+	}
+
+	public DescriptorSetLayout getHorizontalBlurDescriptorSetLayout_div4() {
+		return horizontalBlurDescriptorSetLayout_div4;
+	}
+
+	public List<DescriptorSet> getHorizontalBlurDescriptorSets_div4() {
+		return horizontalBlurDescriptorSets_div4;
+	}
+
+	public VkPipeline getHorizontalBlurPipeline_div8() {
+		return horizontalBlurPipeline_div8;
+	}
+
+	public DescriptorSet getHorizontalBlurDescriptorSet_div8() {
+		return horizontalBlurDescriptorSet_div8;
+	}
+
+	public DescriptorSetLayout getHorizontalBlurDescriptorSetLayout_div8() {
+		return horizontalBlurDescriptorSetLayout_div8;
+	}
+
+	public List<DescriptorSet> getHorizontalBlurDescriptorSets_div8() {
+		return horizontalBlurDescriptorSets_div8;
+	}
+
+	public VkPipeline getHorizontalBlurPipeline_div16() {
+		return horizontalBlurPipeline_div16;
+	}
+
+	public DescriptorSet getHorizontalBlurDescriptorSet_div16() {
+		return horizontalBlurDescriptorSet_div16;
+	}
+
+	public DescriptorSetLayout getHorizontalBlurDescriptorSetLayout_div16() {
+		return horizontalBlurDescriptorSetLayout_div16;
+	}
+
+	public List<DescriptorSet> getHorizontalBlurDescriptorSets_div16() {
+		return horizontalBlurDescriptorSets_div16;
+	}
+
+	public VkPipeline getVerticalBlurPipeline_div2() {
+		return verticalBlurPipeline_div2;
+	}
+
+	public DescriptorSet getVerticalBlurDescriptorSet_div2() {
+		return verticalBlurDescriptorSet_div2;
+	}
+
+	public DescriptorSetLayout getVerticalBlurDescriptorSetLayout_div2() {
+		return verticalBlurDescriptorSetLayout_div2;
+	}
+
+	public List<DescriptorSet> getVerticalBlurDescriptorSets_div2() {
+		return verticalBlurDescriptorSets_div2;
+	}
+
+	public VkPipeline getVerticalBlurPipeline_div4() {
+		return verticalBlurPipeline_div4;
+	}
+
+	public DescriptorSet getVerticalBlurDescriptorSet_div4() {
+		return verticalBlurDescriptorSet_div4;
+	}
+
+	public DescriptorSetLayout getVerticalBlurDescriptorSetLayout_div4() {
+		return verticalBlurDescriptorSetLayout_div4;
+	}
+
+	public List<DescriptorSet> getVerticalBlurDescriptorSets_div4() {
+		return verticalBlurDescriptorSets_div4;
+	}
+
+	public VkPipeline getVerticalBlurPipeline_div8() {
+		return verticalBlurPipeline_div8;
+	}
+
+	public DescriptorSet getVerticalBlurDescriptorSet_div8() {
+		return verticalBlurDescriptorSet_div8;
+	}
+
+	public DescriptorSetLayout getVerticalBlurDescriptorSetLayout_div8() {
+		return verticalBlurDescriptorSetLayout_div8;
+	}
+
+	public List<DescriptorSet> getVerticalBlurDescriptorSets_div8() {
+		return verticalBlurDescriptorSets_div8;
+	}
+
+	public VkPipeline getVerticalBlurPipeline_div16() {
+		return verticalBlurPipeline_div16;
+	}
+
+	public DescriptorSet getVerticalBlurDescriptorSet_div16() {
+		return verticalBlurDescriptorSet_div16;
+	}
+
+	public DescriptorSetLayout getVerticalBlurDescriptorSetLayout_div16() {
+		return verticalBlurDescriptorSetLayout_div16;
+	}
+
+	public List<DescriptorSet> getVerticalBlurDescriptorSets_div16() {
+		return verticalBlurDescriptorSets_div16;
+	}
+
+	public VkPipeline getBlendPipeline() {
+		return blendPipeline;
+	}
+
+	public DescriptorSet getBlendDescriptorSet() {
+		return blendDescriptorSet;
+	}
+
+	public DescriptorSetLayout getBlendDescriptorSetLayout() {
+		return blendDescriptorSetLayout;
+	}
+
+	public VkSampler getBloomBlurSampler_div2() {
+		return bloomBlurSampler_div2;
+	}
+
+	public VkSampler getBloomBlurSampler_div4() {
+		return bloomBlurSampler_div4;
+	}
+
+	public VkSampler getBloomBlurSampler_div8() {
+		return bloomBlurSampler_div8;
+	}
+
+	public VkSampler getBloomBlurSampler_div16() {
+		return bloomBlurSampler_div16;
+	}
+
+	public List<DescriptorSet> getBlendDescriptorSets() {
+		return blendDescriptorSets;
+	}
+
+	public VkPipeline getBloomScenePipeline() {
+		return bloomScenePipeline;
+	}
+
+	public DescriptorSet getBloomSceneDescriptorSet() {
+		return bloomSceneDescriptorSet;
+	}
+
+	public DescriptorSetLayout getBloomSceneDescriptorSetLayout() {
+		return bloomSceneDescriptorSetLayout;
+	}
+
+	public List<DescriptorSet> getBloomSceneDescriptorSets() {
+		return bloomSceneDescriptorSets;
+	}
+
+	public ByteBuffer getPushConstants_blend() {
+		return pushConstants_blend;
+	}
+
+	public ByteBuffer getPushConstants_div2() {
+		return pushConstants_div2;
+	}
+
+	public ByteBuffer getPushConstants_div4() {
+		return pushConstants_div4;
+	}
+
+	public ByteBuffer getPushConstants_div8() {
+		return pushConstants_div8;
+	}
+
+	public ByteBuffer getPushConstants_div16() {
+		return pushConstants_div16;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package org.oreon.vk.components.fft;
+package core.components.fft;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.system.MemoryUtil.memAllocInt;
@@ -23,33 +23,40 @@ import java.nio.IntBuffer;
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.core.math.Vec2f;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.descriptor.DescriptorPool;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.pipeline.ShaderModule;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.synchronization.VkSemaphore;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-
-import lombok.Getter;
+import core.math.Vec2f;
+import core.command.CommandBuffer;
+import core.command.SubmitInfo;
+import core.descriptor.DescriptorPool;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.VkDeviceBundle;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.pipeline.ShaderModule;
+import core.pipeline.VkPipeline;
+import core.synchronization.VkSemaphore;
+import core.util.VkUtil;
+import core.wrapper.image.Image2DDeviceLocal;
 
 public class FFT {
 	
 	private VkQueue computeQueue;
 
-	@Getter
 	private VkImageView dxImageView;
-	@Getter
 	private VkImageView dyImageView;
-	@Getter
 	private VkImageView dzImageView;
+	
+	public VkImageView getDxImageView() {
+		return dxImageView;
+	}
+
+	public VkImageView getDyImageView() {
+		return dyImageView;
+	}
+
+	public VkImageView getDzImageView() {
+		return dzImageView;
+	}
 	
 	private VkImage dxImage;
 	private VkImage dyImage;
@@ -89,9 +96,12 @@ public class FFT {
 	private CommandBuffer fftCommandBuffer;
 	private SubmitInfo fftSubmitInfo;
 
-	@Getter
 	private VkSemaphore fftSignalSemaphore;
 	
+	public VkSemaphore getFftSignalSemaphore() {
+		return fftSignalSemaphore;
+	}
+
 	public FFT(VkDeviceBundle deviceBundle, int N, int L, float t_delta,
 			float amplitude, Vec2f direction, float intensity, float capillarSupressFactor) {
 		
@@ -100,7 +110,7 @@ public class FFT {
 		DescriptorPool descriptorPool = deviceBundle.getLogicalDevice().getDescriptorPool(Thread.currentThread().getId());
 		computeQueue = deviceBundle.getLogicalDevice().getComputeQueue();
 		
-		int stages =  (int) (Math.log(N)/Math.log(2));
+		int stages =  (int) (Math.log(N)/Math.log(2));//stages=log_2(N) defines quadtree depth based on samples N
 		
 		dyPingpongImage = new Image2DDeviceLocal(device, memoryProperties, N, N,
 				VK_FORMAT_R32G32B32A32_SFLOAT,

@@ -1,4 +1,4 @@
-package org.oreon.vk.components.filter;
+package core.components.filter;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.vulkan.VK10.VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
@@ -22,31 +22,29 @@ import java.util.List;
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.core.context.BaseContext;
-import org.oreon.core.math.Vec4f;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.util.Util;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.CommandPool;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.descriptor.DescriptorPool;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.image.VkSampler;
-import org.oreon.core.vk.memory.VkBuffer;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.synchronization.Fence;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.buffer.VkBufferHelper;
-import org.oreon.core.vk.wrapper.command.ComputeCmdBuffer;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-import org.oreon.core.vk.wrapper.shader.ComputeShader;
-
-import lombok.Getter;
+import core.context.BaseContext;
+import core.math.Vec4f;
+import core.util.BufferUtil;
+import core.util.Util;
+import core.command.CommandBuffer;
+import core.command.CommandPool;
+import core.command.SubmitInfo;
+import core.context.VkContext;
+import core.descriptor.DescriptorPool;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.VkDeviceBundle;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.image.VkSampler;
+import core.memory.VkBuffer;
+import core.pipeline.VkPipeline;
+import core.synchronization.Fence;
+import core.util.VkUtil;
+import core.wrapper.buffer.VkBufferHelper;
+import core.wrapper.command.ComputeCmdBuffer;
+import core.wrapper.image.Image2DDeviceLocal;
+import core.wrapper.shader.ComputeShader;
 
 public class SSAO {
 
@@ -63,7 +61,6 @@ public class SSAO {
 	
 	// ssao resources
 	private VkImage ssaoImage;
-	@Getter
 	private VkImageView ssaoImageView;
 	private VkPipeline ssaoPipeline;
 	private VkBuffer kernelBuffer;
@@ -74,7 +71,6 @@ public class SSAO {
 	
 	// ssao blur resources
 	private VkImage ssaoBlurSceneImage;
-	@Getter
 	private VkImageView ssaoBlurSceneImageView;
 	private VkPipeline ssaoBlurPipeline;
 	private DescriptorSet ssaoBlurDescriptorSet;
@@ -293,6 +289,14 @@ public class SSAO {
 		
 		ssaoSubmitInfo.submit(queue);
 		ssaoBlurSubmitInfo.submit(queue);
+	}
+
+	public VkImageView getSsaoImageView() {
+		return ssaoImageView;
+	}
+
+	public VkImageView getSsaoBlurSceneImageView() {
+		return ssaoBlurSceneImageView;
 	}
 	
 }

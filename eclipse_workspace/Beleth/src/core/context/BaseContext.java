@@ -1,28 +1,18 @@
-package org.oreon.core.context;
+package core.context;
 
-import org.oreon.core.CoreEngine;
-import org.oreon.core.RenderEngine;
-import org.oreon.core.platform.GLFWInput;
-import org.oreon.core.platform.Window;
-import org.oreon.core.scenegraph.Camera;
-
-import lombok.Getter;
-import lombok.Setter;
+import core.CoreEngine;
+import core.RenderEngine;
+import core.platform.GLFWInput;
+import core.platform.Window;
+import core.scenegraph.Camera;
 
 public abstract class BaseContext {
 
-	@Getter
 	protected static Configuration config;
-	@Getter
 	protected static GLFWInput input;
-	@Getter
 	protected static Camera camera;
-	@Getter
 	protected static Window window;
-	@Getter
 	protected static CoreEngine coreEngine;
-	@Getter
-	@Setter
 	protected static RenderEngine renderEngine;
 	
 	public static void init() {
@@ -32,4 +22,32 @@ public abstract class BaseContext {
 		coreEngine = new CoreEngine();
 	}
 
+	public static RenderEngine getRenderEngine() {
+		return renderEngine;
+	}
+
+	public static void setRenderEngine(RenderEngine renderEngine) {
+		BaseContext.renderEngine = renderEngine;
+	}
+
+	public static Configuration getConfig() {
+		return config;
+	}
+
+	public static GLFWInput getInput() {
+		return input;
+	}
+
+	public static Camera getCamera() {
+		return camera;
+	}
+
+	public static Window getWindow() {
+		return window;
+	}
+
+	public static CoreEngine getCoreEngine() {
+		return coreEngine;
+	}
+	
 }

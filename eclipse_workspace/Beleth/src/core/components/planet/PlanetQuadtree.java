@@ -1,15 +1,15 @@
-package org.oreon.vk.components.planet;
+package core.components.planet;
 
 import java.util.Map;
 
-import org.oreon.common.planet.SphericalCubeQuadtree;
-import org.oreon.common.quadtree.QuadtreeCache;
-import org.oreon.common.quadtree.QuadtreeChunk;
-import org.oreon.core.math.Transform;
-import org.oreon.core.math.Vec2f;
-import org.oreon.core.scenegraph.NodeComponent;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.vk.components.terrain.TerrainChunk;
+import core.common.planet.SphericalCubeQuadtree;
+import core.common.quadtree.QuadtreeCache;
+import core.common.quadtree.QuadtreeChunk;
+import core.math.Transform;
+import core.math.Vec2f;
+import core.scenegraph.NodeComponent;
+import core.scenegraph.NodeComponentType;
+import core.components.terrain.TerrainChunk;
 
 public class PlanetQuadtree extends SphericalCubeQuadtree{
 

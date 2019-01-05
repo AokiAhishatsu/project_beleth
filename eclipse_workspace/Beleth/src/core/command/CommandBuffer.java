@@ -43,7 +43,6 @@ import java.nio.ByteBuffer;
 import java.nio.LongBuffer;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.Pointer;
 import org.lwjgl.vulkan.VkBufferCopy;
 import org.lwjgl.vulkan.VkBufferImageCopy;
 import org.lwjgl.vulkan.VkClearValue;
@@ -60,6 +59,7 @@ import org.lwjgl.vulkan.VkMemoryBarrier;
 import org.lwjgl.vulkan.VkOffset3D;
 import org.lwjgl.vulkan.VkRect2D;
 import org.lwjgl.vulkan.VkRenderPassBeginInfo;
+
 import core.math.Vec3f;
 import core.util.VkUtil;
 

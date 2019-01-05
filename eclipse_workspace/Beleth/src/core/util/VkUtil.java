@@ -42,6 +42,7 @@ import java.nio.LongBuffer;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.vulkan.VkClearColorValue;
 import org.lwjgl.vulkan.VkClearValue;
@@ -52,6 +53,8 @@ import core.descriptor.DescriptorSetLayout;
 
 
 public class VkUtil {
+	
+	final static Logger log = Logger.getLogger(VkUtil.class);
 	
 	public static void vkCheckResult(int err){
 		

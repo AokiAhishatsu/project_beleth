@@ -1,4 +1,4 @@
-package org.oreon.vk.components.fft;
+package core.components.fft;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.system.MemoryUtil.memFree;
@@ -18,33 +18,37 @@ import java.nio.ByteBuffer;
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.core.math.Vec2f;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.descriptor.DescriptorPool;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.synchronization.Fence;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.command.ComputeCmdBuffer;
-import org.oreon.core.vk.wrapper.descriptor.VkDescriptor;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-import org.oreon.core.vk.wrapper.image.VkImageHelper;
-import org.oreon.core.vk.wrapper.shader.ComputeShader;
-
-import lombok.Getter;
+import core.math.Vec2f;
+import core.command.CommandBuffer;
+import core.command.SubmitInfo;
+import core.descriptor.DescriptorPool;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.VkDeviceBundle;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.pipeline.VkPipeline;
+import core.synchronization.Fence;
+import core.util.VkUtil;
+import core.wrapper.command.ComputeCmdBuffer;
+import core.wrapper.descriptor.VkDescriptor;
+import core.wrapper.image.Image2DDeviceLocal;
+import core.wrapper.image.VkImageHelper;
+import core.wrapper.shader.ComputeShader;
 
 public class H0k {
 
-	@Getter
 	private VkImageView h0k_imageView;
-	@Getter
 	private VkImageView h0minusk_imageView;
 	
+	public VkImageView getH0k_imageView() {
+		return h0k_imageView;
+	}
+
+	public VkImageView getH0minusk_imageView() {
+		return h0minusk_imageView;
+	}
+
 	private VkImage h0k_image;
 	private VkImage h0minusk_image;
 	

@@ -1,4 +1,4 @@
-package org.oreon.vk.components.fft;
+package core.components.fft;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.system.MemoryUtil.memFree;
@@ -18,33 +18,34 @@ import java.nio.IntBuffer;
 import org.lwjgl.vulkan.VkDevice;
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
 import org.lwjgl.vulkan.VkQueue;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.util.Util;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.command.SubmitInfo;
-import org.oreon.core.vk.descriptor.DescriptorPool;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.VkDeviceBundle;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.memory.VkBuffer;
-import org.oreon.core.vk.pipeline.ShaderModule;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.synchronization.Fence;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.buffer.VkBufferHelper;
-import org.oreon.core.vk.wrapper.command.ComputeCmdBuffer;
-import org.oreon.core.vk.wrapper.descriptor.VkDescriptor;
-import org.oreon.core.vk.wrapper.image.Image2DDeviceLocal;
-
-import lombok.Getter;
+import core.util.BufferUtil;
+import core.util.Util;
+import core.command.CommandBuffer;
+import core.command.SubmitInfo;
+import core.descriptor.DescriptorPool;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.VkDeviceBundle;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.memory.VkBuffer;
+import core.pipeline.ShaderModule;
+import core.pipeline.VkPipeline;
+import core.synchronization.Fence;
+import core.util.VkUtil;
+import core.wrapper.buffer.VkBufferHelper;
+import core.wrapper.command.ComputeCmdBuffer;
+import core.wrapper.descriptor.VkDescriptor;
+import core.wrapper.image.Image2DDeviceLocal;
 
 public class TwiddleFactors {
 
-	@Getter
 	private VkImageView imageView;
 	
+	public VkImageView getImageView() {
+		return imageView;
+	}
+
 	private VkImage image;
 	
 	public TwiddleFactors(VkDeviceBundle deviceBundle, int n) {

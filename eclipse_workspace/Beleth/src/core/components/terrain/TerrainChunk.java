@@ -1,4 +1,4 @@
-package org.oreon.vk.components.terrain;
+package core.components.terrain;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.vulkan.VK10.VK_SHADER_STAGE_ALL_GRAPHICS;
@@ -6,25 +6,25 @@ import static org.lwjgl.vulkan.VK10.VK_SHADER_STAGE_ALL_GRAPHICS;
 import java.nio.ByteBuffer;
 import java.util.Map;
 
-import org.oreon.common.quadtree.QuadtreeCache;
-import org.oreon.common.quadtree.QuadtreeChunk;
-import org.oreon.core.context.BaseContext;
-import org.oreon.core.math.Transform;
-import org.oreon.core.math.Vec2f;
-import org.oreon.core.math.Vec4f;
-import org.oreon.core.scenegraph.NodeComponent;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.context.DeviceManager.DeviceType;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.device.LogicalDevice;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.scenegraph.VkMeshData;
-import org.oreon.core.vk.scenegraph.VkRenderInfo;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.command.SecondaryDrawCmdBuffer;
-import org.oreon.core.vk.wrapper.pipeline.GraphicsTessellationPipeline;
+import core.common.quadtree.QuadtreeCache;
+import core.common.quadtree.QuadtreeChunk;
+import core.context.BaseContext;
+import core.math.Transform;
+import core.math.Vec2f;
+import core.math.Vec4f;
+import core.scenegraph.NodeComponent;
+import core.scenegraph.NodeComponentType;
+import core.util.BufferUtil;
+import core.command.CommandBuffer;
+import core.context.DeviceManager.DeviceType;
+import core.context.VkContext;
+import core.device.LogicalDevice;
+import core.pipeline.VkPipeline;
+import core.scenegraph.VkMeshData;
+import core.scenegraph.VkRenderInfo;
+import core.util.VkUtil;
+import core.wrapper.command.SecondaryDrawCmdBuffer;
+import core.wrapper.pipeline.GraphicsTessellationPipeline;
 
 public class TerrainChunk extends QuadtreeChunk{
 

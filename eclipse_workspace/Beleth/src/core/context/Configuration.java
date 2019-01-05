@@ -1,17 +1,12 @@
-package org.oreon.core.context;
+package core.context;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.oreon.core.math.Vec4f;
-import org.oreon.core.util.Constants;
+import core.math.Vec4f;
+import core.util.Constants;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class Configuration {
 	
 	// screen settings
@@ -80,4 +75,157 @@ public class Configuration {
 		clipplane = Constants.ZEROPLANE;
 		
 	}
+
+	public int getX_ScreenResolution() {
+		return x_ScreenResolution;
+	}
+
+	public void setX_ScreenResolution(int x_ScreenResolution) {
+		this.x_ScreenResolution = x_ScreenResolution;
+	}
+
+	public int getY_ScreenResolution() {
+		return y_ScreenResolution;
+	}
+
+	public void setY_ScreenResolution(int y_ScreenResolution) {
+		this.y_ScreenResolution = y_ScreenResolution;
+	}
+
+	public String getDisplayTitle() {
+		return displayTitle;
+	}
+
+	public void setDisplayTitle(String displayTitle) {
+		this.displayTitle = displayTitle;
+	}
+
+	public int getWindowWidth() {
+		return windowWidth;
+	}
+
+	public void setWindowWidth(int windowWidth) {
+		this.windowWidth = windowWidth;
+	}
+
+	public int getWindowHeight() {
+		return windowHeight;
+	}
+
+	public void setWindowHeight(int windowHeight) {
+		this.windowHeight = windowHeight;
+	}
+
+	public boolean isFxaaEnabled() {
+		return fxaaEnabled;
+	}
+
+	public void setFxaaEnabled(boolean fxaaEnabled) {
+		this.fxaaEnabled = fxaaEnabled;
+	}
+
+	public float getSightRange() {
+		return sightRange;
+	}
+
+	public void setSightRange(float sightRange) {
+		this.sightRange = sightRange;
+	}
+
+	public boolean isSsaoEnabled() {
+		return ssaoEnabled;
+	}
+
+	public void setSsaoEnabled(boolean ssaoEnabled) {
+		this.ssaoEnabled = ssaoEnabled;
+	}
+
+	public boolean isBloomEnabled() {
+		return bloomEnabled;
+	}
+
+	public void setBloomEnabled(boolean bloomEnabled) {
+		this.bloomEnabled = bloomEnabled;
+	}
+
+	public boolean isDepthOfFieldBlurEnabled() {
+		return depthOfFieldBlurEnabled;
+	}
+
+	public void setDepthOfFieldBlurEnabled(boolean depthOfFieldBlurEnabled) {
+		this.depthOfFieldBlurEnabled = depthOfFieldBlurEnabled;
+	}
+
+	public boolean isMotionBlurEnabled() {
+		return motionBlurEnabled;
+	}
+
+	public void setMotionBlurEnabled(boolean motionBlurEnabled) {
+		this.motionBlurEnabled = motionBlurEnabled;
+	}
+
+	public boolean isLightScatteringEnabled() {
+		return lightScatteringEnabled;
+	}
+
+	public void setLightScatteringEnabled(boolean lightScatteringEnabled) {
+		this.lightScatteringEnabled = lightScatteringEnabled;
+	}
+
+	public boolean isLensFlareEnabled() {
+		return lensFlareEnabled;
+	}
+
+	public void setLensFlareEnabled(boolean lensFlareEnabled) {
+		this.lensFlareEnabled = lensFlareEnabled;
+	}
+
+	public boolean isRenderWireframe() {
+		return renderWireframe;
+	}
+
+	public void setRenderWireframe(boolean renderWireframe) {
+		this.renderWireframe = renderWireframe;
+	}
+
+	public boolean isRenderUnderwater() {
+		return renderUnderwater;
+	}
+
+	public void setRenderUnderwater(boolean renderUnderwater) {
+		this.renderUnderwater = renderUnderwater;
+	}
+
+	public boolean isRenderReflection() {
+		return renderReflection;
+	}
+
+	public void setRenderReflection(boolean renderReflection) {
+		this.renderReflection = renderReflection;
+	}
+
+	public boolean isRenderRefraction() {
+		return renderRefraction;
+	}
+
+	public void setRenderRefraction(boolean renderRefraction) {
+		this.renderRefraction = renderRefraction;
+	}
+
+	public Vec4f getClipplane() {
+		return clipplane;
+	}
+
+	public void setClipplane(Vec4f clipplane) {
+		this.clipplane = clipplane;
+	}
+
+	public int getMultisamples() {
+		return multisamples;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+	
 }

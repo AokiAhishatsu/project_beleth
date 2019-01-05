@@ -1,4 +1,4 @@
-package org.oreon.vk.components.planet;
+package core.components.planet;
 
 import static org.lwjgl.vulkan.VK10.VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
 
@@ -8,32 +8,29 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
-import org.oreon.common.quadtree.Quadtree;
-import org.oreon.common.terrain.TerrainConfiguration;
-import org.oreon.core.math.Vec2f;
-import org.oreon.core.model.Vertex.VertexLayout;
-import org.oreon.core.scenegraph.Node;
-import org.oreon.core.scenegraph.NodeComponent;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.util.MeshGenerator;
-import org.oreon.core.vk.context.DeviceManager.DeviceType;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.LogicalDevice;
-import org.oreon.core.vk.memory.VkBuffer;
-import org.oreon.core.vk.pipeline.ShaderPipeline;
-import org.oreon.core.vk.pipeline.VkVertexInput;
-import org.oreon.core.vk.scenegraph.VkMeshData;
-import org.oreon.core.vk.scenegraph.VkRenderInfo;
-import org.oreon.core.vk.wrapper.buffer.VkBufferHelper;
-
-import lombok.Getter;
+import core.common.quadtree.Quadtree;
+import core.common.terrain.TerrainConfiguration;
+import core.math.Vec2f;
+import core.model.Vertex.VertexLayout;
+import core.scenegraph.Node;
+import core.scenegraph.NodeComponent;
+import core.scenegraph.NodeComponentType;
+import core.util.BufferUtil;
+import core.util.MeshGenerator;
+import core.context.DeviceManager.DeviceType;
+import core.context.VkContext;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.LogicalDevice;
+import core.memory.VkBuffer;
+import core.pipeline.ShaderPipeline;
+import core.pipeline.VkVertexInput;
+import core.scenegraph.VkMeshData;
+import core.scenegraph.VkRenderInfo;
+import core.wrapper.buffer.VkBufferHelper;
 
 public class Planet extends Node{
 	
-	@Getter
 	private Quadtree quadtree;
 	
 	public Planet() {
@@ -94,4 +91,8 @@ public class Planet extends Node{
 		return;
 	}
 
+	public Quadtree getQuadtree() {
+		return quadtree;
+	}
+	
 }

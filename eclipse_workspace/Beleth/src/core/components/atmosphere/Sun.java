@@ -1,4 +1,4 @@
-package org.oreon.vk.components.atmosphere;
+package core.components.atmosphere;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.vulkan.VK10.VK_ACCESS_SHADER_READ_BIT;
@@ -22,33 +22,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
-import org.oreon.core.context.BaseContext;
-import org.oreon.core.math.Vec3f;
-import org.oreon.core.model.Vertex.VertexLayout;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.core.scenegraph.Renderable;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.context.DeviceManager.DeviceType;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.LogicalDevice;
-import org.oreon.core.vk.image.VkImage;
-import org.oreon.core.vk.image.VkImageView;
-import org.oreon.core.vk.image.VkSampler;
-import org.oreon.core.vk.memory.VkBuffer;
-import org.oreon.core.vk.pipeline.ShaderPipeline;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.pipeline.VkVertexInput;
-import org.oreon.core.vk.scenegraph.VkMeshData;
-import org.oreon.core.vk.scenegraph.VkRenderInfo;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.buffer.VkBufferHelper;
-import org.oreon.core.vk.wrapper.command.SecondaryDrawCmdBuffer;
-import org.oreon.core.vk.wrapper.image.VkImageBundle;
-import org.oreon.core.vk.wrapper.image.VkImageHelper;
-import org.oreon.core.vk.wrapper.pipeline.GraphicsPipeline;
+import core.context.BaseContext;
+import core.math.Vec3f;
+import core.model.Vertex.VertexLayout;
+import core.scenegraph.NodeComponentType;
+import core.scenegraph.Renderable;
+import core.util.BufferUtil;
+import core.command.CommandBuffer;
+import core.context.DeviceManager.DeviceType;
+import core.context.VkContext;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.LogicalDevice;
+import core.image.VkImage;
+import core.image.VkImageView;
+import core.image.VkSampler;
+import core.memory.VkBuffer;
+import core.pipeline.ShaderPipeline;
+import core.pipeline.VkPipeline;
+import core.pipeline.VkVertexInput;
+import core.scenegraph.VkMeshData;
+import core.scenegraph.VkRenderInfo;
+import core.util.VkUtil;
+import core.wrapper.buffer.VkBufferHelper;
+import core.wrapper.command.SecondaryDrawCmdBuffer;
+import core.wrapper.image.VkImageBundle;
+import core.wrapper.image.VkImageHelper;
+import core.wrapper.pipeline.GraphicsPipeline;
 
 public class Sun extends Renderable{
 	

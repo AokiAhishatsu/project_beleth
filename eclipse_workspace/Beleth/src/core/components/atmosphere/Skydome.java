@@ -1,4 +1,4 @@
-package org.oreon.vk.components.atmosphere;
+package core.components.atmosphere;
 
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.vulkan.VK10.VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
@@ -12,33 +12,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.vulkan.VkPhysicalDeviceMemoryProperties;
-import org.oreon.core.context.BaseContext;
-import org.oreon.core.model.Mesh;
-import org.oreon.core.model.Vertex.VertexLayout;
-import org.oreon.core.scenegraph.NodeComponentType;
-import org.oreon.core.scenegraph.Renderable;
-import org.oreon.core.util.BufferUtil;
-import org.oreon.core.util.Constants;
-import org.oreon.core.util.ProceduralTexturing;
-import org.oreon.core.vk.command.CommandBuffer;
-import org.oreon.core.vk.context.DeviceManager.DeviceType;
-import org.oreon.core.vk.context.VkContext;
-import org.oreon.core.vk.descriptor.DescriptorSet;
-import org.oreon.core.vk.descriptor.DescriptorSetLayout;
-import org.oreon.core.vk.device.LogicalDevice;
-import org.oreon.core.vk.memory.VkBuffer;
-import org.oreon.core.vk.pipeline.ShaderModule;
-import org.oreon.core.vk.pipeline.ShaderPipeline;
-import org.oreon.core.vk.pipeline.VkPipeline;
-import org.oreon.core.vk.pipeline.VkVertexInput;
-import org.oreon.core.vk.scenegraph.VkMeshData;
-import org.oreon.core.vk.scenegraph.VkRenderInfo;
-import org.oreon.core.vk.util.VkAssimpModelLoader;
-import org.oreon.core.vk.util.VkUtil;
-import org.oreon.core.vk.wrapper.buffer.VkBufferHelper;
-import org.oreon.core.vk.wrapper.buffer.VkUniformBuffer;
-import org.oreon.core.vk.wrapper.command.SecondaryDrawIndexedCmdBuffer;
-import org.oreon.core.vk.wrapper.pipeline.GraphicsPipeline;
+import core.context.BaseContext;
+import core.model.Mesh;
+import core.model.Vertex.VertexLayout;
+import core.scenegraph.NodeComponentType;
+import core.scenegraph.Renderable;
+import core.util.BufferUtil;
+import core.util.Constants;
+import core.util.ProceduralTexturing;
+import core.command.CommandBuffer;
+import core.context.DeviceManager.DeviceType;
+import core.context.VkContext;
+import core.descriptor.DescriptorSet;
+import core.descriptor.DescriptorSetLayout;
+import core.device.LogicalDevice;
+import core.memory.VkBuffer;
+import core.pipeline.ShaderModule;
+import core.pipeline.ShaderPipeline;
+import core.pipeline.VkPipeline;
+import core.pipeline.VkVertexInput;
+import core.scenegraph.VkMeshData;
+import core.scenegraph.VkRenderInfo;
+import core.util.VkAssimpModelLoader;
+import core.util.VkUtil;
+import core.wrapper.buffer.VkBufferHelper;
+import core.wrapper.buffer.VkUniformBuffer;
+import core.wrapper.command.SecondaryDrawIndexedCmdBuffer;
+import core.wrapper.pipeline.GraphicsPipeline;
 
 public class Skydome extends Renderable{
 	
@@ -167,10 +167,9 @@ public class Skydome extends Renderable{
 	    reflectionShaderPipeline.destroy();
 	}
 	
-	public void update()
-	{	
-		super.update();
+	public void update(){	
 		
+		super.update();
 		uniformBuffer.mapMemory(BufferUtil.createByteBuffer(getWorldTransform().getWorldMatrix()));
 	}
 	

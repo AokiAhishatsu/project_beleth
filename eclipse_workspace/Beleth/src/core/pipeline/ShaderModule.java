@@ -76,4 +76,12 @@ public class ShaderModule {
 		handle = -1;
 	}
 
+	public VkPipelineShaderStageCreateInfo getShaderStageInfo() {
+		return shaderStageInfo;
+	}
+
+	public long getHandle() {
+		return handle;
+	}
+
 }

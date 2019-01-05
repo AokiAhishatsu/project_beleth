@@ -1,4 +1,4 @@
-package org.oreon.vk.components.terrain;
+package core.components.terrain;
 
 public class Terrain {
 
