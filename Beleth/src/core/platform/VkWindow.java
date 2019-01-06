@@ -35,7 +35,7 @@ public class VkWindow extends Window{
 		    throw new RuntimeException("Failed to create window");
 		}
         
-        setIcon("res/textures/logo/oreon_lwjgl_icon32.png");
+        setIcon("res/textures/logo/Beleth_icon32.png");
 	}
 	
 	@Override

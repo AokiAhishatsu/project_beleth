@@ -19,7 +19,7 @@ public class SandboxWorld {
 		renderEngine.getSceneGraph().addObject(new Skydome());
 		renderEngine.getSceneGraph().addTransparentObject(new Sun());
 		renderEngine.getSceneGraph().setWater(new Water());
-//		renderEngine.getSceneGraph().setTerrain(new Planet());
+ 		//renderEngine.getSceneGraph().setTerrain(new Planet());
 		
 		VkContext.setRenderEngine(renderEngine);
 		VkContext.getCoreEngine().start();
