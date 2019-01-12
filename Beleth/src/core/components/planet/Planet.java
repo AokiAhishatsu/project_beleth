@@ -36,8 +36,7 @@ public class Planet extends Node{
 	public Planet() {
 		
 		LogicalDevice device = VkContext.getDeviceManager().getLogicalDevice(DeviceType.MAJOR_GRAPHICS_DEVICE);
-		VkPhysicalDeviceMemoryProperties memoryProperties = 
-				VkContext.getDeviceManager().getPhysicalDevice(DeviceType.MAJOR_GRAPHICS_DEVICE).getMemoryProperties();
+		VkPhysicalDeviceMemoryProperties memoryProperties = VkContext.getDeviceManager().getPhysicalDevice(DeviceType.MAJOR_GRAPHICS_DEVICE).getMemoryProperties();
 		
 		Vec2f[] mesh = MeshGenerator.TerrainChunkMesh();
 		ByteBuffer vertexBuffer = BufferUtil.createByteBuffer(mesh);
@@ -50,8 +49,7 @@ public class Planet extends Node{
 		VkMeshData meshData = VkMeshData.builder().vertexBufferObject(vertexBufferObject)
 				.vertexBuffer(vertexBuffer).vertexCount(mesh.length).build();
 
-		HashMap<NodeComponentType, NodeComponent> components =
-				new HashMap<NodeComponentType, NodeComponent>();
+		HashMap<NodeComponentType, NodeComponent> components = new HashMap<NodeComponentType, NodeComponent>();
 		
 		TerrainConfiguration config = new TerrainConfiguration();
 		
@@ -78,8 +76,7 @@ public class Planet extends Node{
 		components.put(NodeComponentType.MAIN_RENDERINFO, renderInfo);
 		components.put(NodeComponentType.MESH_DATA, meshData);
 		
-		PlanetQuadtree planetQuadtree = new PlanetQuadtree(components,
-				config.getRootChunkCount(), config.getHorizontalScaling());
+		PlanetQuadtree planetQuadtree = new PlanetQuadtree(components, config.getRootChunkCount(), config.getHorizontalScaling());
 		
 		quadtree = planetQuadtree;
 		addChild(planetQuadtree);

@@ -18,4 +18,5 @@ public interface Input {
 	public float getScrollOffset();
 	public Vec2f getCursorPosition();
 	public Vec2f getLockedCursorPosition();
+	public boolean getIsInventoryOpen();
 }

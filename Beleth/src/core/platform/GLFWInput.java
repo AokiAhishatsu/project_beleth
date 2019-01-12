@@ -23,6 +23,7 @@ public class GLFWInput implements Input{
 	private float scrollOffset;
 	
 	private boolean pause = false;
+	private boolean isInventoryOpen = false;
 	
 	private GLFWKeyCallback keyCallback;
 	 
@@ -51,6 +52,25 @@ public class GLFWInput implements Input{
 
             @Override
             public void invoke(long window, int key, int scancode, int action, int mods) {
+            	
+//            	if(key == GLFW.GLFW_KEY_I && action == GLFW_PRESS && isInventoryOpen == true) {
+//            		System.out.println("inventory closed");
+//            		if (!pushedKeys.contains(key)){
+//            			pushedKeys.add(key);
+//            			keysHolding.add(key);
+//            		}
+//            		isInventoryOpen = false;
+//                	lockedCursorPosition = new Vec2f(cursorPosition);
+//                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+//                }else if(key == GLFW.GLFW_KEY_I && action == GLFW_PRESS && isInventoryOpen == false){
+//                	isInventoryOpen = true;
+//                	System.out.println("inventory opened");
+//                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+//                	keysHolding.remove(Integer.valueOf(key));
+//                	releasedKeys.add(key);
+//                }
+            	
+            	
             	if (action == GLFW_PRESS){
             		if (!pushedKeys.contains(key)){
             			pushedKeys.add(key);
@@ -70,15 +90,7 @@ public class GLFWInput implements Input{
 
             @Override
             public void invoke(long window, int button, int action, int mods) {
-                if(button == 2 && action == GLFW_PRESS) {
-                	lockedCursorPosition = new Vec2f(cursorPosition);
-                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-                }
 
-                if(button == 2 && action == GLFW_RELEASE) {
-                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-                }
-                
                 if (action == GLFW_PRESS){
                 	if (!pushedButtons.contains(button)){
                 		pushedButtons.add(button);
@@ -180,6 +192,10 @@ public class GLFWInput implements Input{
 
 	public void setLockedCursorPosition(Vec2f lockedCursorPosition) {
 		this.lockedCursorPosition = lockedCursorPosition;
+	}
+	
+	public boolean getIsInventoryOpen() {
+		return isInventoryOpen;
 	}
 	
 	public Set<Integer> getPushedKeys() {

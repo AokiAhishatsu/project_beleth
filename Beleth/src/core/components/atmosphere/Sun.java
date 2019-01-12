@@ -89,21 +89,18 @@ public class Sun extends Renderable{
 				device.getHandle(), memoryProperties,
 				device.getTransferCommandPool(Thread.currentThread().getId()).getHandle(),
 				device.getTransferQueue(),
-				"res/textures/sun/sun_small1.png",
+				"res/textures/sun/sun_small.png",
 				VK_IMAGE_USAGE_SAMPLED_BIT,
 				VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
 				VK_ACCESS_SHADER_READ_BIT,
 				VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
 				VK_QUEUE_GRAPHICS_BIT);
 		
-		VkImageView sunImageView_lightScattering = new VkImageView(device.getHandle(),
-				VK_FORMAT_R8G8B8A8_UNORM, sunImage_lightScattering.getHandle(), VK_IMAGE_ASPECT_COLOR_BIT);
+		VkImageView sunImageView_lightScattering = new VkImageView(device.getHandle(), VK_FORMAT_R8G8B8A8_UNORM, sunImage_lightScattering.getHandle(), VK_IMAGE_ASPECT_COLOR_BIT);
 		
-		VkSampler sunImageSampler_lightScattering = new VkSampler(device.getHandle(), VK_FILTER_LINEAR,
-				false, 0, VK_SAMPLER_MIPMAP_MODE_LINEAR, 0, VK_SAMPLER_ADDRESS_MODE_REPEAT);
+		VkSampler sunImageSampler_lightScattering = new VkSampler(device.getHandle(), VK_FILTER_LINEAR, false, 0, VK_SAMPLER_MIPMAP_MODE_LINEAR, 0, VK_SAMPLER_ADDRESS_MODE_REPEAT);
 		
-		sunImageBundle_lightScattering = new VkImageBundle(sunImage_lightScattering,
-				sunImageView_lightScattering, sunImageSampler_lightScattering);
+		sunImageBundle_lightScattering = new VkImageBundle(sunImage_lightScattering, sunImageView_lightScattering, sunImageSampler_lightScattering);
 		
 		VkVertexInput vertexInput = new VkVertexInput(VertexLayout.POS);
 		ByteBuffer vertexBuffer = BufferUtil.createByteBuffer(array);
@@ -118,10 +115,8 @@ public class Sun extends Renderable{
 		List<DescriptorSetLayout> descriptorSetLayouts = new ArrayList<DescriptorSetLayout>();
 		
 		DescriptorSetLayout descriptorSetLayout = new DescriptorSetLayout(device.getHandle(), 2);
-	    descriptorSetLayout.addLayoutBinding(0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-	    		VK_SHADER_STAGE_FRAGMENT_BIT);
-	    descriptorSetLayout.addLayoutBinding(1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-	    		VK_SHADER_STAGE_FRAGMENT_BIT);
+	    descriptorSetLayout.addLayoutBinding(0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT);
+	    descriptorSetLayout.addLayoutBinding(1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT);
 	    descriptorSetLayout.create();
 	    
 	    DescriptorSet descriptorSet = new DescriptorSet(device.getHandle(),

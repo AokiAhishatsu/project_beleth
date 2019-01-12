@@ -63,12 +63,11 @@ public abstract class Camera {
 	protected FloatBuffer floatBuffer;
 	protected final int bufferSize = Float.BYTES * (4+16+16+(6*4));
 	
-	protected Camera(Vec3f position, Vec3f forward, Vec3f up)
-	{
+	protected Camera(Vec3f position, Vec3f forward, Vec3f up){
 		setPosition(position);
 		setForward(forward.normalize());
 		setUp(up.normalize());
-		setProjection(70, BaseContext.getConfig().getX_ScreenResolution(), BaseContext.getConfig().getY_ScreenResolution());
+		setProjection(100, BaseContext.getConfig().getX_ScreenResolution(), BaseContext.getConfig().getY_ScreenResolution());
 		setViewMatrix(new Matrix4f().View(this.getForward(), this.getUp()).mul(new Matrix4f().Translation(this.getPosition().mul(-1))));
 		initfrustumPlanes();
 		previousViewMatrix = new Matrix4f().Zero();
@@ -112,91 +111,91 @@ public abstract class Camera {
 			rotateY(getRotAmt()/8f);
 		
 		// free mouse rotation
-//		if(true){
-//			
-//			float dy = input.getLockedCursorPosition().getY() - input.getCursorPosition().getY();
-//			float dx = input.getLockedCursorPosition().getX() - input.getCursorPosition().getX();
-//			
-//			// y-axxis rotation
-//			if (dy != 0){
-//				setRotYamt(getRotYamt() - dy);
-//				setRotYstride(Math.abs(getRotYamt() * 0.1f));
-//			}
-//			
-//			if (getRotYamt() != 0 || getRotYstride() != 0){
-//				
-//				// up-rotation
-//				if (getRotYamt() < 0){
-//					setUpRotation(true);
-//					setDownRotation(false);
-//					rotateX(-getRotYstride() * getMouseSensitivity());
-//					setRotYamt(getRotYamt() + getRotYstride());
-//					if (getRotYamt() > 0)
-//						setRotYamt(0);
-//				}
-//				// down-rotation
-//				if (getRotYamt() > 0){
-//					setUpRotation(false);
-//					setDownRotation(true);
-//					rotateX(getRotYstride() * getMouseSensitivity());
-//					setRotYamt(getRotYamt() - getRotYstride());
-//					if (getRotYamt() < 0)
-//						setRotYamt(0);
-//				}
-//				// smooth-stop
-//				if (getRotYamt() == 0){
-//					setRotYstride(getRotYstride() * 0.95f);
-//					if (isUpRotation())
-//						rotateX(-getRotYstride() * getMouseSensitivity());
-//					if (isDownRotation())
-//						rotateX(getRotYstride() * getMouseSensitivity());
-//					if (getRotYstride() < 0.001f)
-//						setRotYstride(0);
-//				}
-//			}
-//			
-//			// x-axxis rotation
-//			if (dx != 0){
-//				setRotXamt(getRotXamt() + dx);
-//				setRotXstride(Math.abs(getRotXamt() * 0.1f));
-//			}
-//			
-//			if (getRotXamt() != 0 || getRotXstride() != 0){
-//				
-//				// right-rotation
-//				if (getRotXamt() < 0){
-//					setRightRotation(true);
-//					setLeftRotation(false);
-//					rotateY(getRotXstride() * getMouseSensitivity());
-//					setRotXamt(getRotXamt() + getRotXstride());
-//					if (getRotXamt() > 0)
-//						setRotXamt(0);
-//				}
-//				// left-rotation
-//				if (getRotXamt() > 0){
-//					setRightRotation(false);
-//					setLeftRotation(true);
-//					rotateY(-getRotXstride() * getMouseSensitivity());
-//					setRotXamt(getRotXamt() - getRotXstride());
-//					if (getRotXamt() < 0)
-//						setRotXamt(0);
-//				}
-//				// smooth-stop
-//				if (getRotXamt() == 0){
-//					setRotXstride(getRotXstride() * 0.95f);
-//					if (isRightRotation())
-//						rotateY(getRotXstride() * getMouseSensitivity());
-//					if (isLeftRotation())
-//						rotateY(-getRotXstride() * getMouseSensitivity());
-//					if (getRotXstride() < 0.001f)
-//						setRotXstride(0);
-//				}
-//			}
-//			
-//			glfwSetCursorPos(BaseContext.getWindow().getId(),
-//					input.getLockedCursorPosition().getX(),
-//					input.getLockedCursorPosition().getY());
-//		}
+		if(input.getIsInventoryOpen()){
+			
+			float dy = input.getLockedCursorPosition().getY() - input.getCursorPosition().getY();
+			float dx = input.getLockedCursorPosition().getX() - input.getCursorPosition().getX();
+			
+			// y-axxis rotation
+			if (dy != 0){
+				setRotYamt(getRotYamt() - dy);
+				setRotYstride(Math.abs(getRotYamt() * 0.1f));
+			}
+			
+			if (getRotYamt() != 0 || getRotYstride() != 0){
+				
+				// up-rotation
+				if (getRotYamt() < 0){
+					setUpRotation(true);
+					setDownRotation(false);
+					rotateX(-getRotYstride() * getMouseSensitivity());
+					setRotYamt(getRotYamt() + getRotYstride());
+					if (getRotYamt() > 0)
+						setRotYamt(0);
+				}
+				// down-rotation
+				if (getRotYamt() > 0){
+					setUpRotation(false);
+					setDownRotation(true);
+					rotateX(getRotYstride() * getMouseSensitivity());
+					setRotYamt(getRotYamt() - getRotYstride());
+					if (getRotYamt() < 0)
+						setRotYamt(0);
+				}
+				// smooth-stop
+				if (getRotYamt() == 0){
+					setRotYstride(getRotYstride() * 0.95f);
+					if (isUpRotation())
+						rotateX(-getRotYstride() * getMouseSensitivity());
+					if (isDownRotation())
+						rotateX(getRotYstride() * getMouseSensitivity());
+					if (getRotYstride() < 0.001f)
+						setRotYstride(0);
+				}
+			}
+			
+			// x-axxis rotation
+			if (dx != 0){
+				setRotXamt(getRotXamt() + dx);
+				setRotXstride(Math.abs(getRotXamt() * 0.1f));
+			}
+			
+			if (getRotXamt() != 0 || getRotXstride() != 0){
+				
+				// right-rotation
+				if (getRotXamt() < 0){
+					setRightRotation(true);
+					setLeftRotation(false);
+					rotateY(getRotXstride() * getMouseSensitivity());
+					setRotXamt(getRotXamt() + getRotXstride());
+					if (getRotXamt() > 0)
+						setRotXamt(0);
+				}
+				// left-rotation
+				if (getRotXamt() > 0){
+					setRightRotation(false);
+					setLeftRotation(true);
+					rotateY(-getRotXstride() * getMouseSensitivity());
+					setRotXamt(getRotXamt() - getRotXstride());
+					if (getRotXamt() < 0)
+						setRotXamt(0);
+				}
+				// smooth-stop
+				if (getRotXamt() == 0){
+					setRotXstride(getRotXstride() * 0.95f);
+					if (isRightRotation())
+						rotateY(getRotXstride() * getMouseSensitivity());
+					if (isLeftRotation())
+						rotateY(-getRotXstride() * getMouseSensitivity());
+					if (getRotXstride() < 0.001f)
+						setRotXstride(0);
+				}
+			}
+			
+			glfwSetCursorPos(BaseContext.getWindow().getId(),
+					input.getLockedCursorPosition().getX(),
+					input.getLockedCursorPosition().getY());
+		}
 		
 		if (!getPosition().equals(getPreviousPosition())){
 			setCameraMoved(true);
