@@ -1,37 +1,68 @@
 package launcher;
 
-import java.awt.FlowLayout;
+import launcher.VideoMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
+
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.GraphicsDevice;
+import java.awt.Dimension;
+import java.awt.DisplayMode;
+import java.awt.FlowLayout;
+
+import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
 
 public class SandboxLauncher {
 
-	private static JTextField textfield1, textfield2, textfield3;
-		
 	public static void main(String[] args) {
-			  		  
-		JFrame f = new JFrame("Sandbox Launcher");
-		
-		f.getContentPane().setLayout(new FlowLayout());
-		textfield1 = new JTextField("Text field 1", 10);
-		textfield2 = new JTextField("Text field 2", 10);
-		textfield3 = new JTextField("Text field 3", 10);
-		f.getContentPane().add(textfield1);
-		f.getContentPane().add(textfield2);
-		f.getContentPane().add(textfield3);
-		
-		JButton b = new JButton("Play >", new ImageIcon("play.png"));    
-		b.setBounds(200, 200, 200, 100);
-		f.getContentPane().add(b);   
-		
-		f.setSize(250,300);    
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//f.pack();
-		f.setVisible(true);
-	}
-	
 
+		int monitor = (int) glfwGetPrimaryMonitor();
+		GraphicsEnvironment localEnvironment = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] deviceList = localEnvironment.getScreenDevices();
+		DisplayMode[] modeList = deviceList[monitor].getDisplayModes();
+
+		List<VideoMode> modes = new ArrayList<>();
+		for (DisplayMode mode : modeList) {
+			VideoMode nm = new VideoMode(mode.getWidth(), mode.getHeight());
+			if (!modes.contains(nm))
+				modes.add(nm);
+		}
+		System.out.println(modes.size() + " video modes found");
+
+		JFrame frame = new JFrame("Sandbox Launcher");
+		frame.getContentPane().setLayout(new FlowLayout());
+
+		JComboBox<VideoMode> modeCb = new JComboBox<VideoMode>();
+		for (VideoMode mode : modes)
+			modeCb.addItem(mode);
+		frame.add(modeCb);
+
+		JButton playBtn = new JButton("Play", new ImageIcon("play.png"));
+		playBtn.setPreferredSize(new Dimension(65, 25));
+		playBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VideoMode svm = (VideoMode) modeCb.getSelectedItem();
+				String[] margs = { "-width", Integer.toString(svm.Width), "-height", Integer.toString(svm.Height) };
+				new Thread(() -> {
+					sandbox.SandboxWorld.main(margs);
+				}).start();
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}
+		});
+		frame.add(playBtn);
+
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+	}
 }
