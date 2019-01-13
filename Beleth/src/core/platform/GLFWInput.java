@@ -37,6 +37,8 @@ public class GLFWInput implements Input{
 	
 	public GLFWInput(){
 		cursorPosition = new Vec2f();
+		lockedCursorPosition = new Vec2f(cursorPosition);
+		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	}
 	
 	public void create(long window) {
@@ -53,22 +55,22 @@ public class GLFWInput implements Input{
             @Override
             public void invoke(long window, int key, int scancode, int action, int mods) {
             	
-//            	if(key == GLFW.GLFW_KEY_I && action == GLFW_PRESS && isInventoryOpen == true) {
-//            		System.out.println("inventory closed");
-//            		if (!pushedKeys.contains(key)){
-//            			pushedKeys.add(key);
-//            			keysHolding.add(key);
-//            		}
-//            		isInventoryOpen = false;
-//                	lockedCursorPosition = new Vec2f(cursorPosition);
-//                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-//                }else if(key == GLFW.GLFW_KEY_I && action == GLFW_PRESS && isInventoryOpen == false){
-//                	isInventoryOpen = true;
-//                	System.out.println("inventory opened");
-//                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-//                	keysHolding.remove(Integer.valueOf(key));
-//                	releasedKeys.add(key);
-//                }
+            	if(key == GLFW.GLFW_KEY_I && action == GLFW_PRESS && isInventoryOpen == true) {
+            		System.out.println("inventory closed");
+            		if (!pushedKeys.contains(key)){
+            			pushedKeys.add(key);
+            			keysHolding.add(key);
+            		}
+            		isInventoryOpen = false;
+                	lockedCursorPosition = new Vec2f(cursorPosition);
+                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+                }else if(key == GLFW.GLFW_KEY_I && action == GLFW_PRESS && isInventoryOpen == false){
+                	isInventoryOpen = true;
+                	System.out.println("inventory opened");
+                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                	keysHolding.remove(Integer.valueOf(key));
+                	releasedKeys.add(key);
+                }
             	
             	
             	if (action == GLFW_PRESS){

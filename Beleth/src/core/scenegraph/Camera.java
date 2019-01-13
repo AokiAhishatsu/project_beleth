@@ -12,8 +12,6 @@ import static org.lwjgl.glfw.GLFW.glfwSetCursorPos;
 
 import java.nio.FloatBuffer;
 
-import org.lwjgl.glfw.GLFW;
-
 import core.context.BaseContext;
 import core.math.Matrix4f;
 import core.math.Vec3f;
@@ -111,7 +109,7 @@ public abstract class Camera {
 			rotateY(getRotAmt()/8f);
 		
 		// free mouse rotation
-		if(input.getIsInventoryOpen()){
+		if(!input.getIsInventoryOpen()){
 			
 			float dy = input.getLockedCursorPosition().getY() - input.getCursorPosition().getY();
 			float dx = input.getLockedCursorPosition().getX() - input.getCursorPosition().getX();
