@@ -1,8 +1,10 @@
 package core.context;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
 import core.math.Vec4f;
@@ -11,6 +13,8 @@ import core.util.Constants;
 public class Configuration {
 	
 	private static Configuration instance;
+	
+	private boolean isValidated;
 	
 	// screen settings
 	private int x_ScreenResolution;
@@ -22,7 +26,7 @@ public class Configuration {
 	private int windowHeight;
 	
 	// anitaliasing
-	private final int multisamples;
+	private int multisamples;
 	private boolean fxaaEnabled;
 	
 	// static render settings
@@ -44,11 +48,13 @@ public class Configuration {
 	
 	private final Properties properties;
 	
+	private final String filePath = "src/res/engine-config.properties";
+	
 	private Configuration(){
 		
 		properties = new Properties();
 		try {
-			InputStream input = new FileInputStream("src/res/engine-config.properties");
+			InputStream input = new FileInputStream(filePath);
 			properties.load(input);
 			input.close();
 		} catch (IOException e) {
@@ -63,6 +69,8 @@ public class Configuration {
 		multisamples = Integer.valueOf(properties.getProperty("multisamples"));
 		fxaaEnabled = Integer.valueOf(properties.getProperty("fxaa.enable")) == 1 ? true : false;
 		sightRange = Float.valueOf(properties.getProperty("sightRange"));
+		
+		isValidated = Integer.valueOf(properties.getProperty("validation.enable")) == 1 ? true : false;
 		
 		bloomEnabled = Integer.valueOf(properties.getProperty("bloom.enable")) == 1 ? true : false;
 		ssaoEnabled = Integer.valueOf(properties.getProperty("ssao.enable")) == 1 ? true : false;
@@ -83,6 +91,15 @@ public class Configuration {
 			Configuration.instance = new Configuration ();
 		return Configuration.instance;
 	}
+	
+	public void saveParamChanges() {
+		try {
+			OutputStream out = new FileOutputStream(filePath);
+			properties.store(out, "Beleth engine-config");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int getX_ScreenResolution() {
 		return x_ScreenResolution;
@@ -90,6 +107,7 @@ public class Configuration {
 
 	public void setX_ScreenResolution(int x_ScreenResolution) {
 		this.x_ScreenResolution = x_ScreenResolution;
+		this.properties.setProperty("screen.resolution.x", String.valueOf(x_ScreenResolution));
 	}
 
 	public int getY_ScreenResolution() {
@@ -98,6 +116,7 @@ public class Configuration {
 
 	public void setY_ScreenResolution(int y_ScreenResolution) {
 		this.y_ScreenResolution = y_ScreenResolution;
+		this.properties.setProperty("screen.resolution.y", String.valueOf(y_ScreenResolution));
 	}
 
 	public String getDisplayTitle() {
@@ -106,6 +125,7 @@ public class Configuration {
 
 	public void setDisplayTitle(String displayTitle) {
 		this.displayTitle = displayTitle;
+		this.properties.setProperty("display.title", displayTitle);
 	}
 
 	public int getWindowWidth() {
@@ -114,6 +134,7 @@ public class Configuration {
 
 	public void setWindowWidth(int windowWidth) {
 		this.windowWidth = windowWidth;
+		this.properties.setProperty("display.width", String.valueOf(windowWidth));
 	}
 
 	public int getWindowHeight() {
@@ -122,6 +143,16 @@ public class Configuration {
 
 	public void setWindowHeight(int windowHeight) {
 		this.windowHeight = windowHeight;
+		this.properties.setProperty("display.height", String.valueOf(windowHeight));
+	}
+
+	public boolean getValidation() {
+		return isValidated;
+	}
+
+	public void setValidation(boolean validation) {
+		this.isValidated = validation;
+		this.properties.setProperty("validation.enable", String.valueOf(validation));
 	}
 
 	public boolean isFxaaEnabled() {
@@ -130,6 +161,7 @@ public class Configuration {
 
 	public void setFxaaEnabled(boolean fxaaEnabled) {
 		this.fxaaEnabled = fxaaEnabled;
+		this.properties.setProperty("fxaa.enable", String.valueOf(fxaaEnabled));
 	}
 
 	public float getSightRange() {
@@ -138,6 +170,7 @@ public class Configuration {
 
 	public void setSightRange(float sightRange) {
 		this.sightRange = sightRange;
+		this.properties.setProperty("sightRange", String.valueOf(sightRange));
 	}
 
 	public boolean isSsaoEnabled() {
@@ -146,6 +179,7 @@ public class Configuration {
 
 	public void setSsaoEnabled(boolean ssaoEnabled) {
 		this.ssaoEnabled = ssaoEnabled;
+		this.properties.setProperty("ssao.enable", String.valueOf(ssaoEnabled));
 	}
 
 	public boolean isBloomEnabled() {
@@ -154,6 +188,7 @@ public class Configuration {
 
 	public void setBloomEnabled(boolean bloomEnabled) {
 		this.bloomEnabled = bloomEnabled;
+		this.properties.setProperty("bloom.enable", String.valueOf(bloomEnabled));
 	}
 
 	public boolean isDepthOfFieldBlurEnabled() {
@@ -162,6 +197,7 @@ public class Configuration {
 
 	public void setDepthOfFieldBlurEnabled(boolean depthOfFieldBlurEnabled) {
 		this.depthOfFieldBlurEnabled = depthOfFieldBlurEnabled;
+		this.properties.setProperty("depthOfFieldBlur.enable", String.valueOf(depthOfFieldBlurEnabled));
 	}
 
 	public boolean isMotionBlurEnabled() {
@@ -170,6 +206,7 @@ public class Configuration {
 
 	public void setMotionBlurEnabled(boolean motionBlurEnabled) {
 		this.motionBlurEnabled = motionBlurEnabled;
+		this.properties.setProperty("motionBlur.enable", String.valueOf(motionBlurEnabled));
 	}
 
 	public boolean isLightScatteringEnabled() {
@@ -178,6 +215,7 @@ public class Configuration {
 
 	public void setLightScatteringEnabled(boolean lightScatteringEnabled) {
 		this.lightScatteringEnabled = lightScatteringEnabled;
+		this.properties.setProperty("lightScattering.enable", String.valueOf(lightScatteringEnabled));
 	}
 
 	public boolean isLensFlareEnabled() {
@@ -186,6 +224,7 @@ public class Configuration {
 
 	public void setLensFlareEnabled(boolean lensFlareEnabled) {
 		this.lensFlareEnabled = lensFlareEnabled;
+		this.properties.setProperty("lensFlare.enable", String.valueOf(lensFlareEnabled));
 	}
 
 	public boolean isRenderWireframe() {
@@ -194,6 +233,7 @@ public class Configuration {
 
 	public void setRenderWireframe(boolean renderWireframe) {
 		this.renderWireframe = renderWireframe;
+		// Not in file yet.
 	}
 
 	public boolean isRenderUnderwater() {
@@ -202,6 +242,7 @@ public class Configuration {
 
 	public void setRenderUnderwater(boolean renderUnderwater) {
 		this.renderUnderwater = renderUnderwater;
+		// Not in file yet.
 	}
 
 	public boolean isRenderReflection() {
@@ -210,6 +251,7 @@ public class Configuration {
 
 	public void setRenderReflection(boolean renderReflection) {
 		this.renderReflection = renderReflection;
+		// Not in file yet.
 	}
 
 	public boolean isRenderRefraction() {
@@ -218,6 +260,7 @@ public class Configuration {
 
 	public void setRenderRefraction(boolean renderRefraction) {
 		this.renderRefraction = renderRefraction;
+		// Not in file yet.
 	}
 
 	public Vec4f getClipplane() {
@@ -226,14 +269,15 @@ public class Configuration {
 
 	public void setClipplane(Vec4f clipplane) {
 		this.clipplane = clipplane;
+		// Not in file yet.
 	}
 
 	public int getMultisamples() {
 		return multisamples;
 	}
-
-	public Properties getProperties() {
-		return properties;
-	}
 	
+	public void setMultisamples(int multisamples) {
+		this.multisamples = multisamples;
+		this.properties.setProperty("multisamples", String.valueOf(multisamples));
+	}
 }

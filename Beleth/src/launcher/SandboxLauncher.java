@@ -49,21 +49,30 @@ public class SandboxLauncher {
 		JFrame frame = new JFrame("Sandbox Launcher");
 		frame.getContentPane().setLayout(new FlowLayout());
 
-		JComboBox<VideoMode> modeCb = new JComboBox<VideoMode>();
-		for (VideoMode mode : modes)
-			modeCb.addItem(mode);
-		frame.add(modeCb);
+		JComboBox<VideoMode> modeCombo = new JComboBox<VideoMode>();
+		
+		VideoMode confMode = new VideoMode(conf.getWindowWidth(), conf.getWindowHeight());
+		if (!modes.contains(confMode))
+			modeCombo.addItem(confMode);
 
+		for (VideoMode mode : modes)
+			modeCombo.addItem(mode);
+		
+		modeCombo.setSelectedItem(confMode);
+		
+		frame.add(modeCombo);
+		
 		JButton playBtn = new JButton("Play", new ImageIcon("play.png"));
 		playBtn.setPreferredSize(new Dimension(65, 25));
 		playBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VideoMode svm = (VideoMode) modeCb.getSelectedItem();
+				VideoMode svm = (VideoMode) modeCombo.getSelectedItem();
 				conf.setWindowWidth(svm.Width);
 				conf.setWindowHeight(svm.Height);
 				conf.setX_ScreenResolution(svm.Width);
 				conf.setY_ScreenResolution(svm.Height);
+				conf.saveParamChanges();
 				new Thread(() -> {sandbox.SandboxWorld.main(null);}).start();
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}

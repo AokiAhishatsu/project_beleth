@@ -55,8 +55,7 @@ public class VkContext extends BaseContext {
 
 		enabledLayers = layers;
 
-		vkInstance = new VulkanInstance(VkUtil.getValidationLayerNames(
-				Integer.valueOf(config.getProperties().getProperty("validation.enable")) == 1 ? true : false, layers));
+		vkInstance = new VulkanInstance(VkUtil.getValidationLayerNames(config.getValidation(), layers));
 
 		getWindow().create();
 
