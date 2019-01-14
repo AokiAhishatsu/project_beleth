@@ -33,11 +33,11 @@ public class VkContext extends BaseContext {
 	private static DeviceManager deviceManager;
 	private static long surface;
 
-	public static void create(VideoMode v) {
+	public static void create() {
 
 		init();
 
-		window = v == null ? new VkWindow() : new VkWindow(v);
+		window = new VkWindow();
 		camera = new VkCamera();
 		resources = new VkResources();
 		deviceManager = new DeviceManager();

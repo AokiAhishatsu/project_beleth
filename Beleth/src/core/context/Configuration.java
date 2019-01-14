@@ -10,6 +10,8 @@ import core.util.Constants;
 
 public class Configuration {
 	
+	private static Configuration instance;
+	
 	// screen settings
 	private int x_ScreenResolution;
 	private int y_ScreenResolution;
@@ -42,7 +44,7 @@ public class Configuration {
 	
 	private final Properties properties;
 	
-	public Configuration(){
+	private Configuration(){
 		
 		properties = new Properties();
 		try {
@@ -74,7 +76,12 @@ public class Configuration {
 		renderReflection = false;
 		renderRefraction = false;
 		clipplane = Constants.ZEROPLANE;
-		
+	}
+	
+	public static Configuration getInstance () {
+		if (Configuration.instance == null)
+			Configuration.instance = new Configuration ();
+		return Configuration.instance;
 	}
 
 	public int getX_ScreenResolution() {

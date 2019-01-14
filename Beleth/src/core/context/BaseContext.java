@@ -17,7 +17,7 @@ public abstract class BaseContext {
 	
 	public static void init() {
 		
-		config = new Configuration();
+		config = Configuration.getInstance();
 		input = new GLFWInput();
 		coreEngine = new CoreEngine();
 	}

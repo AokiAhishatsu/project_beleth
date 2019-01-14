@@ -17,16 +17,9 @@ import core.context.VkContext;
 
 public class VkWindow extends Window {
 	
-	private VideoMode vMode = null;
-	
 	public VkWindow() {
 		super(VkContext.getConfig().getDisplayTitle(), VkContext.getConfig().getWindowWidth(),
 				VkContext.getConfig().getWindowHeight());
-	}
-	
-	public VkWindow(VideoMode vMode) {
-		super(VkContext.getConfig().getDisplayTitle(), vMode.Width, vMode.Height);
-		this.vMode = vMode;
 	}
 	
 	public void create() {
@@ -35,10 +28,7 @@ public class VkWindow extends Window {
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		
-		if (vMode != null)
-			setId(glfwCreateWindow(vMode.Width, vMode.Height, getTitle(), 0, 0));
-		else
-			setId(glfwCreateWindow(getWidth(), getHeight(), getTitle(), 0, 0));
+		setId(glfwCreateWindow(getWidth(), getHeight(), getTitle(), 0, 0));
 
 		if (getId() == 0) {
 			throw new RuntimeException("Failed to create window");

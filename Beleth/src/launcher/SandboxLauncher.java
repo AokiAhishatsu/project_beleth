@@ -4,11 +4,14 @@ import launcher.VideoMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+
+import core.context.Configuration;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
@@ -21,9 +24,14 @@ import java.awt.FlowLayout;
 
 import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
 
+
 public class SandboxLauncher {
+	
+	private static Properties properties;
 
 	public static void main(String[] args) {
+
+		Configuration conf = Configuration.getInstance();
 
 		int monitor = (int) glfwGetPrimaryMonitor();
 		GraphicsEnvironment localEnvironment = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -52,10 +60,11 @@ public class SandboxLauncher {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VideoMode svm = (VideoMode) modeCb.getSelectedItem();
-				String[] margs = { "-width", Integer.toString(svm.Width), "-height", Integer.toString(svm.Height) };
-				new Thread(() -> {
-					sandbox.SandboxWorld.main(margs);
-				}).start();
+				conf.setWindowWidth(svm.Width);
+				conf.setWindowHeight(svm.Height);
+				conf.setX_ScreenResolution(svm.Width);
+				conf.setY_ScreenResolution(svm.Height);
+				new Thread(() -> {sandbox.SandboxWorld.main(null);}).start();
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
