@@ -24,6 +24,7 @@ public class Configuration {
 	private String displayTitle;
 	private int windowWidth;
 	private int windowHeight;
+	private boolean fullScreenEnabled;
 	
 	// anitaliasing
 	private int multisamples;
@@ -66,6 +67,7 @@ public class Configuration {
 		displayTitle = properties.getProperty("display.title");
 		x_ScreenResolution = Integer.valueOf(properties.getProperty("screen.resolution.x"));
 		y_ScreenResolution = Integer.valueOf(properties.getProperty("screen.resolution.y"));
+		fullScreenEnabled = Boolean.valueOf(properties.getProperty("fullscreen.enable"));
 		multisamples = Integer.valueOf(properties.getProperty("multisamples"));
 		fxaaEnabled = Integer.valueOf(properties.getProperty("fxaa.enable")) == 1 ? true : false;
 		sightRange = Float.valueOf(properties.getProperty("sightRange"));
@@ -97,6 +99,7 @@ public class Configuration {
 			OutputStream out = new FileOutputStream(filePath);
 			properties.store(out, "Beleth engine-config");
 		} catch (IOException e) {
+			System.err.println("Error writing config.");
 			e.printStackTrace();
 		}
 	}
@@ -145,7 +148,16 @@ public class Configuration {
 		this.windowHeight = windowHeight;
 		this.properties.setProperty("display.height", String.valueOf(windowHeight));
 	}
+	
+	public boolean getFullscreen() {
+		return fullScreenEnabled;
+	}
 
+	public void setFullscreen(boolean fullScreenEnabled) {
+		this.fullScreenEnabled = fullScreenEnabled;
+		this.properties.setProperty("fullscreen.enable", String.valueOf(fullScreenEnabled));
+	}
+	
 	public boolean getValidation() {
 		return isValidated;
 	}

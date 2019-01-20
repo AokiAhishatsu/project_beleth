@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
@@ -27,12 +28,11 @@ import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
 
 public class SandboxLauncher {
 	
-	private static Properties properties;
-
 	public static void main(String[] args) {
 
 		Configuration conf = Configuration.getInstance();
-
+		
+		// Get available video modes
 		int monitor = (int) glfwGetPrimaryMonitor();
 		GraphicsEnvironment localEnvironment = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] deviceList = localEnvironment.getScreenDevices();
@@ -45,23 +45,31 @@ public class SandboxLauncher {
 				modes.add(nm);
 		}
 		System.out.println(modes.size() + " video modes found");
-
-		JFrame frame = new JFrame("Sandbox Launcher");
-		frame.getContentPane().setLayout(new FlowLayout());
-
-		JComboBox<VideoMode> modeCombo = new JComboBox<VideoMode>();
 		
+		// Frame
+		JFrame frame = new JFrame("Sandbox Launcher");
+		
+		// FlowLayout
+		frame.getContentPane().setLayout(new FlowLayout());
+		
+		// ComboBox
+		JComboBox<VideoMode> modeCombo = new JComboBox<VideoMode>();
 		VideoMode confMode = new VideoMode(conf.getWindowWidth(), conf.getWindowHeight());
+		
 		if (!modes.contains(confMode))
 			modeCombo.addItem(confMode);
-
+		
 		for (VideoMode mode : modes)
 			modeCombo.addItem(mode);
 		
 		modeCombo.setSelectedItem(confMode);
-		
 		frame.add(modeCombo);
 		
+		// CheckBox fullscreen
+		JCheckBox fullCb = new JCheckBox("Fullscreen");
+		frame.add(fullCb);
+
+		// Play button
 		JButton playBtn = new JButton("Play", new ImageIcon("play.png"));
 		playBtn.setPreferredSize(new Dimension(65, 25));
 		playBtn.addActionListener(new ActionListener() {
@@ -72,13 +80,15 @@ public class SandboxLauncher {
 				conf.setWindowHeight(svm.Height);
 				conf.setX_ScreenResolution(svm.Width);
 				conf.setY_ScreenResolution(svm.Height);
+				conf.setFullscreen(fullCb.isSelected());
 				conf.saveParamChanges();
 				new Thread(() -> {sandbox.SandboxWorld.main(null);}).start();
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		frame.add(playBtn);
-
+		
+		// Misc
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
